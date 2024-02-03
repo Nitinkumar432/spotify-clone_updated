@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spotify Clone</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #282828;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        #songContainer {
+            display: flex;
+            overflow-x: scroll;
+            gap: 20px;
+        }
+
+        .songCard {
+            position: relative;
+            width: 200px; /* Set a fixed width for each song card */
+            background-color: #333;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease-in-out;
+        }
+
+        .songCard:hover {
+            transform: scale(1.05);
+        }
+
+        .songImage {
+            width: 100%;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        .songDetails {
+            font-size: 14px;
+            /* opacity: 0; Initially hidden */
+            transition: opacity 0.2s ease-in-out;
+        }
+
+        .songCard:hover .songDetails {
+            opacity: 1;
+        }
+
+        .songTitle {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .songArtist {
+            color: #888;
+        }
+
+        .playIcon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0; /* Initially hidden */
+            transition: opacity 0.2s ease-in-out;
+        }
+
+        .songCard:hover .playIcon {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <div id="songContainer"></div>
+
+    <script>
+        // Sample data for songs
+        const songs = [
+            { title: 'hey come here ', artist: 'nia jain', duration: '3:45', image: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8bXVzaWMlMjBhcnRpc3R8ZW58MHx8MHx8fDA%3D' },
+            { title: 'do not forget', artist: 'chunna pandey2', duration: '4:20', image: 'https://images.unsplash.com/photo-1573120525707-4549889744f2?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8bXVzaWMlMjBhcnRpc3R8ZW58MHx8MHx8fDA%3D' },
+            { title: 'slight way', artist: 'akshay aruna', duration: '3:30', image: 'https://plus.unsplash.com/premium_photo-1683298921706-bf6506c8e9bc?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8bXVzaWMlMjBhcnRpc3R8ZW58MHx8MHx8fDA%3D' },
+            // Add more songs as needed
+        ];
+
+        // Function to create song cards
+        function createSongCard(song) {
+            const card = document.createElement('div');
+            card.classList.add('songCard');
+
+            const image = document.createElement('img');
+            image.src = song.image;
+            image.alt = song.title;
+            image.classList.add('songImage');
+
+            const details = document.createElement('div');
+            details.classList.add('songDetails');
+
+            const title = document.createElement('div');
+            title.classList.add('songTitle');
+            title.textContent = song.title;
+
+            const artist = document.createElement('div');
+            artist.classList.add('songArtist');
+            artist.textContent = song.artist;
+
+            const duration = document.createElement('div');
+            duration.textContent = song.duration;
+
+            const playIcon = document.createElement('div');
+            playIcon.classList.add('playIcon');
+            playIcon.textContent = '▶'; // Play icon
+
+            details.appendChild(title);
+            details.appendChild(artist);
+            details.appendChild(duration);
+
+            card.appendChild(image);
+            card.appendChild(details);
+            card.appendChild(playIcon);
+
+            return card;
+        }
+
+        // Populate songs
+        const songContainer = document.getElementById('songContainer');
+        songs.forEach(song => {
+            const card = createSongCard(song);
+            songContainer.appendChild(card);
+        });
+    </script>
+</body>
+</html>
